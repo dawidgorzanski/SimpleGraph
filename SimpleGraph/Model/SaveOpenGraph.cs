@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SimpleGraph.Model
 {
-    //Pamiętać o zamknięciu pliku - można użyć "using(new ..." i wtedy się sam zamknie zawsze
+    //Pamiętać o zamknięciu pliku - można użyć "using(new ..." i wtedy plik się zawsze zamknie
     public static class SaveOpenGraph
     {
         public static bool SaveToFile(string Graph)
