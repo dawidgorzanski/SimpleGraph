@@ -10,6 +10,7 @@ using System.Windows.Shapes;
 
 namespace SimpleGraph.Model
 {
+    //Ta klasa będzie jeszcze zmieniana - będzie przyjmować obiekt Graph i na jego podstawie rysować graf
     public class DrawGraph
     {
         private List<Point> _nodesPoints;

@@ -8,6 +8,6 @@ namespace SimpleGraph.Model
 {
     public class Graph
     {
-
+        //TODO
     }
 }
