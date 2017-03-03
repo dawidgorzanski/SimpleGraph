@@ -32,7 +32,7 @@ namespace SimpleGraph.Model
             return new Graph();
         }
 
-        public static Graph CreateFullGraph()
+        public static Graph CreateFullGraph(int Nodes)
         {
             //TODO
             return new Graph();
