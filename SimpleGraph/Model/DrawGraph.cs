@@ -132,4 +132,4 @@ namespace SimpleGraph.Model
             _canvas.Children.Clear();
         }
     }
-    }
+}

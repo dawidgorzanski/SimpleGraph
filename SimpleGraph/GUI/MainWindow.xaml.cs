@@ -25,7 +25,6 @@ namespace SimpleGraph
         public MainWindow()
         {
             InitializeComponent();
-            Label label = new Label();
             draw = new DrawGraph(mainCanvas);
         }
 
