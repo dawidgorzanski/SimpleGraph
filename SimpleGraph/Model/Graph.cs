@@ -46,6 +46,7 @@ namespace SimpleGraph.Model
         public void AddConnection(Connection connection)
         {
             //TODO
+            _connections.Add(connection);
         }
         
         public string ToMatrixString()
