@@ -40,12 +40,14 @@ namespace SimpleGraph.Model
 
         public void AddNode(Node node)
         {
-            //TODO - sprawdzić czy != null
+            if (node != null)
+                Nodes.Add(node);
+
         }
 
         public void AddConnection(Connection connection)
         {
-            //TODO
+            Connections.Add(connection);
         }
         
         public string ToMatrixString()
