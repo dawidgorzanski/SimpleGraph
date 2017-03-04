@@ -15,32 +15,33 @@ namespace SimpleGraph.Model
             return true;
         }
 
-      public static string ReadFromFile(string FilePath)
+        public static string ReadFromFile(string FilePath)
         {
-            string text = null;
-            using (TextReader reader = File.OpenText("C:\\Users\\IgnoRant\\Desktop\\test.txt"))
-            {
-                text = reader.ReadToEnd();
-                string[] lines = text.Split('\n');
-                foreach(string line in lines)
-                {
-                    string[] numbers = line.Split(' ');
-                    if(lines.Length!=numbers.Length)
-                    {
-                        text = null;
-                        break;
-                    }
-                    foreach(string Char in numbers)
-                    {
-                        if(Char!="1"&&Char!="0")
-                        {
-                            text = null;
-                            break;
-                        }
-                    }
-                }
-            }
-            return text;
+            /*   string text = null;
+               using (TextReader reader = File.OpenText("C:\\Users\\IgnoRant\\Desktop\\test.txt"))
+               {
+                   text = reader.ReadToEnd();
+                   string[] lines = text.Split('\n');
+                   foreach(string line in lines)
+                   {
+                       string[] numbers = line.Split(' ');
+                       if(lines.Length!=numbers.Length)
+                       {
+                           text = null;
+                           break;
+                       }
+                       foreach(string Char in numbers)
+                       {
+                           if(Char!="1"&&Char!="0")
+                           {
+                               text = null;
+                               break;
+                           }
+                       }
+                   }
+               }
+               return text;*/
+            return String.Empty;
         }
     }
 }
