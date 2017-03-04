@@ -4,29 +4,52 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SimpleGraph"
+        xmlns:xtlk="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
         mc:Ignorable="d"
-        Title="MainWindow" Height="768" Width="1366" WindowState="Maximized">
+        Title="Simple Graph" Height="768" Width="1366" WindowState="Maximized">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="3*" Name="col1"/>
-            <ColumnDefinition Name="col2"/>
-        </Grid.ColumnDefinitions>
+        <TabControl FontSize="18" SelectedIndex="1">
+            <TabItem Header="Designer" >
+                <Grid>
 
-        <Border BorderThickness="4" BorderBrush="Black">
-            <Canvas Name="mainCanvas" Grid.Column="0" Height="{Binding ElementName=mainWindow, Path=Height}" Width="{Binding ElementName=col1, Path=Width}" />
-        </Border>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Rysunek" >
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*" Name="col1"/>
+                        <ColumnDefinition Name="col2"/>
+                    </Grid.ColumnDefinitions>
 
-        <Border BorderThickness="4" BorderBrush="Black" Grid.Column="1" >
-            <StackPanel Margin="10">
-                <Label Content="Liczba punktów: " />
-                <TextBox Name="tbNumberOfNodes" />
-                <Label Content="Promień okręgu: " />
-                <TextBox Name="tbRadius" />
-                <Label Content="Promień punktu: " />
-                <TextBox Name="tbNodeRadius" />
-                <Button Name="btnDrawFullGraph" Content="RYSUJ PEŁNY GRAF" Click="btnDrawFullGraph_Click"/>
-                <Button Name="btnClear" Content="WYCZYŚĆ" Click="btnClear_Click" />
-            </StackPanel>
-        </Border>
+                    <Border BorderThickness="4" BorderBrush="Black">
+                        <Canvas Name="mainCanvas" Grid.Column="0" Height="{Binding ElementName=mainWindow, Path=Height}" Width="{Binding ElementName=col1, Path=Width}" />
+                    </Border>
+
+                    <Border BorderThickness="4" BorderBrush="Black" Grid.Column="1" >
+                        <StackPanel Margin="10">
+                            <Label Content="Liczba punktów: " />
+                            <TextBox Name="tbNumberOfNodes" />
+                            <Label Content="Promień okręgu: " />
+                            <TextBox Name="tbRadius" />
+                            <Label Content="Promień punktu: " />
+                            <TextBox Name="tbNodeRadius" />
+                            <Button Name="btnDrawFullGraph" Content="RYSUJ PEŁNY GRAF" Click="btnDrawFullGraph_Click"/>
+                            <Button Name="btnClear" Content="WYCZYŚĆ" Click="btnClear_Click" />
+                            
+                            <Label Content="Kolor punktów: " Margin="0, 50, 0, 0"/>
+                            <xtlk:ColorPicker Name="colorPickerPoints" AdvancedButtonHeader="Zaawansowane" AvailableColorsHeader="Dostępne kolory" 
+                                      StandardButtonHeader="Standardowe" StandardColorsHeader="Kolory standardowe" SelectedColorChanged="colorPickerPoints_SelectedColorChanged" />
+                            <Label Content="Kolor koła: "/>
+                            <xtlk:ColorPicker Name="colorPickerCircle" AdvancedButtonHeader="Zaawansowane" AvailableColorsHeader="Dostępne kolory" 
+                                      StandardButtonHeader="Standardowe" StandardColorsHeader="Kolory standardowe" SelectedColorChanged="colorPickerCircle_SelectedColorChanged"/>
+                            <Label Content="Kolor linii: "/>
+                            <xtlk:ColorPicker Name="colorPickerLines" AdvancedButtonHeader="Zaawansowane" AvailableColorsHeader="Dostępne kolory" 
+                                      StandardButtonHeader="Standardowe" StandardColorsHeader="Kolory standardowe" SelectedColorChanged="colorPickerLines_SelectedColorChanged"/>
+                        </StackPanel>
+                    </Border>
+                </Grid>
+            </TabItem>
+        </TabControl>
+        
     </Grid>
 </Window>

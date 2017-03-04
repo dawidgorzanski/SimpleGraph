@@ -25,7 +25,8 @@ namespace SimpleGraph
         public MainWindow()
         {
             InitializeComponent();
-            draw = new DrawGraph(mainCanvas);
+            InitializeColorPickers();
+            draw = new DrawGraph(mainCanvas, GraphCreator.CreateFullGraph());
         }
 
         private void btnDrawFullGraph_Click(object sender, RoutedEventArgs e)
@@ -36,12 +37,11 @@ namespace SimpleGraph
             if (!ValidateData(out numberOfNodes, out radius, out nodeRadius))
                 return;
 
-            draw.NumberOfNodes = numberOfNodes;
+            draw.CurrentGraph = GraphCreator.CreateFullGraph(numberOfNodes);
             draw.NodeRadius = nodeRadius;
             draw.Radius = radius;
-            draw.DrawMainCircle(Brushes.Green, 1);
-            draw.DrawNodes();
-            draw.DrawFullGraphLines();
+            draw.DrawMainCircle();
+            draw.Draw();
         }
 
         private bool ValidateData(out int numberOfNodes, out int radius, out int nodeRadius)
@@ -71,9 +71,31 @@ namespace SimpleGraph
             return true;
         }
 
+        private void InitializeColorPickers()
+        {
+            colorPickerCircle.SelectedColor = Colors.Green;
+            colorPickerLines.SelectedColor = Colors.Black;
+            colorPickerPoints.SelectedColor = Colors.Red;
+        }
+
         private void btnClear_Click(object sender, RoutedEventArgs e)
         {
             draw.ClearAll();
+        }
+
+        private void colorPickerPoints_SelectedColorChanged(object sender, RoutedPropertyChangedEventArgs<Color?> e)
+        {
+            Resources["ColorPoints"] = new SolidColorBrush((Color)colorPickerPoints.SelectedColor);
+        }
+
+        private void colorPickerCircle_SelectedColorChanged(object sender, RoutedPropertyChangedEventArgs<Color?> e)
+        {
+            Resources["ColorCircle"] = new SolidColorBrush((Color)colorPickerCircle.SelectedColor);
+        }
+
+        private void colorPickerLines_SelectedColorChanged(object sender, RoutedPropertyChangedEventArgs<Color?> e)
+        {
+            Resources["ColorLines"] = new SolidColorBrush((Color)colorPickerLines.SelectedColor);
         }
     }
 }

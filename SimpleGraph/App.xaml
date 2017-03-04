@@ -9,6 +9,10 @@
                 <ResourceDictionary Source="Theme/MetroLight/Metro.MSControls.Core.Implicit.xaml" />
                 <ResourceDictionary Source="Theme/MetroLight/Metro.MSControls.Toolkit.Implicit.xaml" />
             </ResourceDictionary.MergedDictionaries>
+
+            <SolidColorBrush x:Key="ColorPoints" Color="Red"/>
+            <SolidColorBrush x:Key="ColorCircle" Color="Green"/>
+            <SolidColorBrush x:Key="ColorLines" Color="Black"/>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

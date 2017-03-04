@@ -13,17 +13,9 @@ namespace SimpleGraph.Model
     //Ta klasa będzie jeszcze zmieniana - będzie przyjmować obiekt Graph i na jego podstawie rysować graf
     public class DrawGraph
     {
-        private List<Point> _nodesPoints;
         private List<Line> _lines;
         private Canvas _canvas;
-
-        public List<Point> NodesPoints
-        {
-            get
-            {
-                return _nodesPoints;
-            }
-        }
+        
         public List<Line> Lines
         {
             get
@@ -31,22 +23,13 @@ namespace SimpleGraph.Model
                 return _lines;
             }
         }
-        public int NumberOfNodes { get; set; }
+        public Graph CurrentGraph { get; set; }
         public int Radius { get; set; }
         public int NodeRadius { get; set; }
 
-        //konstruktory - na obiekcie Canvas rysowany jest graf
-        public DrawGraph(Canvas canvas)
+        public DrawGraph(Canvas canvas, Graph graph)
         {
-            this._canvas = canvas;
-            InitializeLists();
-        }
-
-        public DrawGraph(Canvas canvas, int numberOfNodes, int Radius, int NodeRadius)
-        {
-            this.NumberOfNodes = 16;
-            this.Radius = 200;
-            this.NodeRadius = 10;
+            this.CurrentGraph = graph;
             this._canvas = canvas;
             InitializeLists();
         }
@@ -54,16 +37,15 @@ namespace SimpleGraph.Model
         //inicjalizacja _nodesPoints oraz _lines
         private void InitializeLists()
         {
-            _nodesPoints = new List<Point>();
             _lines = new List<Line>();
         }
 
         //rysowanie głównego koła
-        public void DrawMainCircle(Brush Stroke, double StrokeThickness)
+        public void DrawMainCircle()
         {
             Ellipse mainEllipse = new Ellipse();
-            mainEllipse.Stroke = Stroke;
-            mainEllipse.StrokeThickness = StrokeThickness;
+            mainEllipse.SetResourceReference(Ellipse.StrokeProperty, "ColorCircle");
+            mainEllipse.StrokeThickness = 1;
             mainEllipse.Height = mainEllipse.Width = 2 * Radius;
 
             //Ustawiane w ten sposób, gdyz punkt (0,0) elementu to lewy górny róg, a nie jego środek
@@ -74,21 +56,22 @@ namespace SimpleGraph.Model
         }
 
         //rysowanie punktów
-        public void DrawNodes()
+        private void DrawNodes()
         {
             double a = _canvas.ActualWidth / 2;
             double b = _canvas.ActualHeight / 2;
 
-            for (int i = 0; i < NumberOfNodes; i++)
+            for (int i = 0; i < CurrentGraph.Nodes.Count; i++)
             {
-                double t = 2 * Math.PI * i / NumberOfNodes;
+                double t = 2 * Math.PI * i / CurrentGraph.Nodes.Count;
                 int x = (int)Math.Round(a + Radius * Math.Cos(t));
                 int y = (int)Math.Round(b + Radius * Math.Sin(t));
 
-                _nodesPoints.Add(new Point(x, y));
+                CurrentGraph.Nodes[i].PointOnScreen = new Point(x, y);
 
                 Ellipse ellipse = new Ellipse();
-                ellipse.Fill = Brushes.Red;
+                ellipse.SetResourceReference(Ellipse.StrokeProperty, "ColorPoints");
+                ellipse.SetResourceReference(Ellipse.FillProperty, "ColorPoints");
                 ellipse.Height = NodeRadius;
                 ellipse.Width = NodeRadius;
                 Canvas.SetLeft(ellipse, x);
@@ -98,25 +81,29 @@ namespace SimpleGraph.Model
         }
 
         //rysowanie pełnego grafu
-        public bool DrawFullGraphLines()
+        public bool Draw()
         {
-            if (_nodesPoints.Count == 0)
+            if (CurrentGraph.Nodes.Count == 0)
                 return false;
 
-            for (int i = 0; i < NumberOfNodes; i++)
-                for (int j = 0; j < NumberOfNodes; j++)
-                    if (i != j)
-                        DrawLine(_nodesPoints[i], _nodesPoints[j]);
+            //Rysowanie punktów
+            DrawNodes();
+
+            //Rysowanie linii
+            foreach(Connection connection in CurrentGraph.Connections)
+            {
+                DrawLine(connection.Node1.PointOnScreen, connection.Node2.PointOnScreen);
+            }
 
             return true;
         }
 
         //rysowanie linii od punktu node1 do punktu node2
-        public void DrawLine(Point node1, Point node2)
+        private void DrawLine(Point node1, Point node2)
         {
             Line line = new Line();
             line.StrokeThickness = 1;
-            line.Stroke = Brushes.Black;
+            line.SetResourceReference(Line.StrokeProperty, "ColorLines");
             line.X1 = node1.X + NodeRadius / 2;
             line.X2 = node2.X + NodeRadius / 2;
             line.Y1 = node1.Y + NodeRadius / 2;
@@ -127,7 +114,6 @@ namespace SimpleGraph.Model
 
         public void ClearAll()
         {
-            _nodesPoints.Clear();
             _lines.Clear();
             _canvas.Children.Clear();
         }
