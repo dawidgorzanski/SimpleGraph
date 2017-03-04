@@ -27,10 +27,40 @@ namespace SimpleGraph.Model
             return new Graph();
         }
 
-        public static Graph CreateRandomGraph(/*int l, int p */)
+        public static Graph CreateRandomGraph(int Nodes, int Connections)
         {
-            //TODO
-            return new Graph();
+            Graph randomGraph = new Graph();
+
+            for (int i = 0; i < Nodes; i++)
+                randomGraph.Nodes.Add(new Node() { ID = i });
+
+
+            int maxConnections = Nodes * (Nodes - 1) / 2;
+            Random rnd = new Random();
+
+            //Przypadek gdy polaczen do zrealizowania jest mniej niz maksymalna liczba polaczen
+            if (maxConnections - Connections > Connections)
+            {
+                while (Connections > 0)
+                {
+                    int n1 = rnd.Next(0, Nodes);
+                    int n2 = rnd.Next(0, Nodes);
+                    if (n1 == n2) continue;
+                    if (randomGraph.Connections.Exists(x => x.Node1 == randomGraph.Nodes.Find(y => y.ID == n1) && x.Node2 == randomGraph.Nodes.Find(y => y.ID == n2)))
+                        continue;
+                    if (randomGraph.Connections.Exists(x => x.Node2 == randomGraph.Nodes.Find(y => y.ID == n1) && x.Node1 == randomGraph.Nodes.Find(y => y.ID == n2)))
+                        continue;
+
+                    Connection connection = new Connection();
+                    connection.Node1 = randomGraph.Nodes.FirstOrDefault(x => x.ID == n1);
+                    connection.Node2 = randomGraph.Nodes.FirstOrDefault(x => x.ID == n2);
+                    randomGraph.Connections.Add(connection);
+
+                    Connections--;
+                }
+            }
+
+            return randomGraph;
         }
 
         //Zerknijcie na tworzenie połączeń :D
