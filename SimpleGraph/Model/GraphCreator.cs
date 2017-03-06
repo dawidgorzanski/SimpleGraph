@@ -66,12 +66,13 @@ namespace SimpleGraph.Model
                 }
                 return randomGraph;
             }
-            else
+            else //A tutaj ten drugi przypadek
             {
                 Graph randomGraph = CreateFullGraph(Nodes);
 
                 int toDelConnections = maxConnections - Connections;
 
+                Connection removeCompare = randomGraph.Connections.Find(x => x.Node1 == randomGraph.Nodes.Find(y => y.ID == Nodes));
                 while (toDelConnections > 0)
                 {
                     int n1 = rnd.Next(0, Nodes);
@@ -80,7 +81,6 @@ namespace SimpleGraph.Model
                         continue;
                     Connection remove1 = randomGraph.Connections.Find(x => x.Node1 == randomGraph.Nodes.Find(y => y.ID == n1) && x.Node2 == randomGraph.Nodes.Find(y => y.ID == n2));
                     Connection remove2 = randomGraph.Connections.Find(x => x.Node2 == randomGraph.Nodes.Find(y => y.ID == n1) && x.Node1 == randomGraph.Nodes.Find(y => y.ID == n2));
-                    Connection removeCompare = randomGraph.Connections.Find(x => x.Node1 == randomGraph.Nodes.Find(y => y.ID == Nodes));
                     if (remove1 == removeCompare && remove2 == removeCompare)
                         continue;
                     if (remove1 != removeCompare)
