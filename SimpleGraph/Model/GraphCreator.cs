@@ -29,9 +29,7 @@ namespace SimpleGraph.Model
 
         public static Graph CreateRandomGraph(int Nodes, int Connections)
         {
-
-
-            int maxConnections = Nodes * (Nodes - 1) / 2;
+            int maxConnections = Graph.MaxConnections(Nodes);
             Random rnd = new Random();
 
             if (Connections > maxConnections)

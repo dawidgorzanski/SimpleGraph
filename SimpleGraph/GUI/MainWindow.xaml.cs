@@ -29,54 +29,51 @@ namespace SimpleGraph
             draw = new DrawGraph(mainCanvas, GraphCreator.CreateFullGraph());
         }
 
-        private void btnDrawFullGraph_Click(object sender, RoutedEventArgs e)
-        {
-            draw.ClearAll();
-            int radius, nodeRadius, numberOfNodes;
-
-            if (!ValidateData(out numberOfNodes, out radius, out nodeRadius))
-                return;
-
-            draw.CurrentGraph = GraphCreator.CreateFullGraph(numberOfNodes);
-            draw.NodeRadius = nodeRadius;
-            draw.Radius = radius;
-            draw.DrawMainCircle();
-            draw.Draw();
-        }
-
-        private bool ValidateData(out int numberOfNodes, out int radius, out int nodeRadius)
-        {
-            numberOfNodes = 0;
-            radius = 0;
-            nodeRadius = 0;
-
-            if (!Int32.TryParse(tbNumberOfNodes.Text, out numberOfNodes))
-            {
-                MessageBox.Show("Niepoprawna ilość wierzchołków!");
-                return false;
-            }
-
-            if (!Int32.TryParse(tbRadius.Text, out radius))
-            {
-                MessageBox.Show("Niepoprawny promień okręgu!");
-                return false;
-            }
-
-            if (!Int32.TryParse(tbNodeRadius.Text, out nodeRadius))
-            {
-                MessageBox.Show("Niepoprawny promień punktu!");
-                return false;
-            }
-
-            return true;
-        }
-
         private void InitializeColorPickers()
         {
             colorPickerCircle.SelectedColor = Colors.Green;
             colorPickerLines.SelectedColor = Colors.Black;
             colorPickerPoints.SelectedColor = Colors.Red;
         }
+
+        private void btnDrawFullGraph_Click(object sender, RoutedEventArgs e)
+        {
+            draw.ClearAll();
+
+            if (intUpDownPoints.Value != null)
+                draw.CurrentGraph = GraphCreator.CreateFullGraph((int)intUpDownPoints.Value);
+            else
+            {
+                MessageBox.Show("Niepoprawna ilość wierchołków!");
+                return;
+            }
+
+            draw.NodeRadius = (int)sliderNodeRadius.Value;
+            draw.Radius = (int)sliderRadius.Value;
+
+            draw.DrawMainCircle();
+            draw.Draw();
+        }
+
+        private void btnDrawRandomGraph_Click(object sender, RoutedEventArgs e)
+        {
+            draw.ClearAll();
+
+
+            if (intUpDownRandomPoints.Value != null && intUpDownRandomConnections.Value != null)
+                draw.CurrentGraph = GraphCreator.CreateRandomGraph((int)intUpDownRandomPoints.Value, (int)intUpDownRandomConnections.Value);
+            else
+            {
+                MessageBox.Show("Niepoprawna ilość wierchołków bądź połaczeń!");
+                return;
+            }
+
+            draw.NodeRadius = (int)sliderNodeRadius.Value;
+            draw.Radius = (int)sliderRadius.Value;
+
+            draw.DrawMainCircle();
+            draw.Draw();
+        }       
 
         private void btnClear_Click(object sender, RoutedEventArgs e)
         {

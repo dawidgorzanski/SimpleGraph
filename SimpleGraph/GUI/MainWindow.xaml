@@ -11,7 +11,10 @@
         <TabControl FontSize="18" SelectedIndex="1">
             <TabItem Header="Designer" >
                 <Grid>
-
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
                 </Grid>
             </TabItem>
             <TabItem Header="Rysunek" >
@@ -21,30 +24,61 @@
                         <ColumnDefinition Name="col2"/>
                     </Grid.ColumnDefinitions>
 
-                    <Border BorderThickness="4" BorderBrush="Black">
+                    <Border BorderThickness="1" BorderBrush="LightGray">
                         <Canvas Name="mainCanvas" Grid.Column="0" Height="{Binding ElementName=mainWindow, Path=Height}" Width="{Binding ElementName=col1, Path=Width}" />
                     </Border>
 
-                    <Border BorderThickness="4" BorderBrush="Black" Grid.Column="1" >
+                    <Border BorderThickness="1" BorderBrush="LightGray" Grid.Column="1" >
                         <StackPanel Margin="10">
-                            <Label Content="Liczba punktów: " />
-                            <TextBox Name="tbNumberOfNodes" />
                             <Label Content="Promień okręgu: " />
-                            <TextBox Name="tbRadius" />
+                            <Slider Name="sliderRadius" Minimum="100" Maximum="300" IsSnapToTickEnabled="True" TickFrequency="10" Value="200" />
                             <Label Content="Promień punktu: " />
-                            <TextBox Name="tbNodeRadius" />
-                            <Button Name="btnDrawFullGraph" Content="RYSUJ PEŁNY GRAF" Click="btnDrawFullGraph_Click"/>
-                            <Button Name="btnClear" Content="WYCZYŚĆ" Click="btnClear_Click" />
+                            <Slider Name="sliderNodeRadius" Minimum="6" Maximum="40" IsSnapToTickEnabled="True" TickFrequency="2" Value="10"/>
                             
-                            <Label Content="Kolor punktów: " Margin="0, 50, 0, 0"/>
-                            <xtlk:ColorPicker Name="colorPickerPoints" AdvancedButtonHeader="Zaawansowane" AvailableColorsHeader="Dostępne kolory" 
+                            <GroupBox Header="Pełny graf">
+                                <StackPanel>
+                                    <DockPanel>
+                                        <Label Content="Liczba punktów: " Width="105"/>
+                                        <xtlk:IntegerUpDown Name="intUpDownPoints" Height="28" Minimum="0" Value="10"/>
+                                    </DockPanel>
+                                    
+                                    <Button Name="btnDrawFullGraph" Content="RYSUJ GRAF PEŁNY" Margin="0,10,0,0" Click="btnDrawFullGraph_Click"/>
+                                </StackPanel>
+                            </GroupBox>
+
+                            <GroupBox Header="Graf losowy">
+                                <StackPanel>
+                                    <DockPanel>
+                                        <Label Content="Liczba punktów: " Width="105"/>
+                                        <xtlk:IntegerUpDown Name="intUpDownRandomPoints" Height="28" Minimum="0" Value="10"/>
+                                    </DockPanel>
+                                    <DockPanel>
+                                        <Label Content="Liczba połączeń: " Width="105"/>
+                                        <xtlk:IntegerUpDown Name="intUpDownRandomConnections" Height="28" Minimum="0" Value="10"/>
+                                    </DockPanel>
+                                                    
+                                    <Button Name="btnDrawRandomGraph" Content="RYSUJ GRAF" Margin="0,10,0,0" Click="btnDrawRandomGraph_Click"/>
+                                </StackPanel>
+                            </GroupBox>
+
+                            <Button Name="btnClear" Content="WYCZYŚĆ" Margin="0,30,0,10" Click="btnClear_Click" />
+
+                            <DockPanel>
+                                <Label Content="Kolor punktów: " Width="105"/>
+                                <xtlk:ColorPicker Name="colorPickerPoints" AdvancedButtonHeader="Zaawansowane" AvailableColorsHeader="Dostępne kolory" 
                                       StandardButtonHeader="Standardowe" StandardColorsHeader="Kolory standardowe" SelectedColorChanged="colorPickerPoints_SelectedColorChanged" />
-                            <Label Content="Kolor koła: "/>
-                            <xtlk:ColorPicker Name="colorPickerCircle" AdvancedButtonHeader="Zaawansowane" AvailableColorsHeader="Dostępne kolory" 
+                            </DockPanel>
+                            <DockPanel>
+                                <Label Content="Kolor okręgu: " Width="105"/>
+                                <xtlk:ColorPicker Name="colorPickerCircle" AdvancedButtonHeader="Zaawansowane" AvailableColorsHeader="Dostępne kolory" 
                                       StandardButtonHeader="Standardowe" StandardColorsHeader="Kolory standardowe" SelectedColorChanged="colorPickerCircle_SelectedColorChanged"/>
-                            <Label Content="Kolor linii: "/>
-                            <xtlk:ColorPicker Name="colorPickerLines" AdvancedButtonHeader="Zaawansowane" AvailableColorsHeader="Dostępne kolory" 
+                            </DockPanel>
+                            <DockPanel>
+                                <Label Content="Kolor linii: " Width="105"/>
+                                <xtlk:ColorPicker Name="colorPickerLines" AdvancedButtonHeader="Zaawansowane" AvailableColorsHeader="Dostępne kolory" 
                                       StandardButtonHeader="Standardowe" StandardColorsHeader="Kolory standardowe" SelectedColorChanged="colorPickerLines_SelectedColorChanged"/>
+                            </DockPanel>
+
                         </StackPanel>
                     </Border>
                 </Grid>

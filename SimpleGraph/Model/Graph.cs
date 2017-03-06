@@ -38,16 +38,21 @@ namespace SimpleGraph.Model
             _nodes = new List<Node>();
         }
 
+        //statyczna metoda obliczająca ile może być maksymalnie połączeń
+        public static int MaxConnections(int Nodes)
+        {
+            return Nodes * (Nodes - 1) / 2;
+        }
+
         public void AddNode(Node node)
         {
             if (node != null)
-                Nodes.Add(node);
-
+                _nodes.Add(node);
         }
 
         public void AddConnection(Connection connection)
         {
-            Connections.Add(connection);
+            _connections.Add(connection);
         }
         
         public string ToMatrixString()
