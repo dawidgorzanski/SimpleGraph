@@ -27,6 +27,30 @@ namespace SimpleGraph.Model
             return new Graph();
         }
 
+        public static Graph CreateRandomGraphProbability(int Nodes, double Probability) // G(n, p)
+        {
+            Graph randomGraph = new Graph();
+            for (int i = 0; i < Nodes; i++)
+                randomGraph.Nodes.Add(new Node() { ID = i });
+            Random rnd = new Random();
+            double currentProbability;
+            for (int i = 0; i < Nodes; i++)
+            {
+                for (int j = 0; j < Nodes; j++)
+                {
+                    currentProbability = rnd.NextDouble();
+                    if (currentProbability < Probability)
+                    {
+                        Connection connection = new Connection();
+                        connection.Node1 = randomGraph.Nodes.FirstOrDefault(x => x.ID == i);
+                        connection.Node2 = randomGraph.Nodes.FirstOrDefault(x => x.ID == j);
+                        randomGraph.Connections.Add(connection);
+                    }
+                }
+            }
+            return randomGraph;
+        }
+
         public static Graph CreateRandomGraph(int Nodes, int Connections)
         {
             int maxConnections = Graph.MaxConnections(Nodes);
