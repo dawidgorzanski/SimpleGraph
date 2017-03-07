@@ -86,7 +86,7 @@ namespace SimpleGraph
             draw.ClearAll();
 
             if (intUpDownRandomPoints2.Value != null && doubleUpDownProbability.Value != null)
-                draw.CurrentGraph = GraphCreator.CreateRandomGraphProbability((int)intUpDownRandomPoints1.Value, (double)doubleUpDownProbability.Value);
+                draw.CurrentGraph = GraphCreator.CreateRandomGraphProbability((int)intUpDownRandomPoints2.Value, (double)doubleUpDownProbability.Value);
             else
             {
                 MessageBox.Show("Niepoprawna ilość wierchołków!", "Błąd!");
