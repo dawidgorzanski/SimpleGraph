@@ -59,12 +59,18 @@ namespace SimpleGraph
         {
             draw.ClearAll();
 
+            if (Graph.MaxConnections((int)intUpDownRandomPoints.Value) < (int)intUpDownRandomConnections.Value)
+            {
+                MessageBox.Show(String.Format("Przekroczono maksymalną liczbę połaczeń!\nMaksymalna liczba polaczen dla {0} wierzcholkow wynosi {1}.",
+                    (int)intUpDownRandomPoints.Value, Graph.MaxConnections((int)intUpDownRandomPoints.Value)), "Błąd!");
+                return;
+            }
 
             if (intUpDownRandomPoints.Value != null && intUpDownRandomConnections.Value != null)
                 draw.CurrentGraph = GraphCreator.CreateRandomGraph((int)intUpDownRandomPoints.Value, (int)intUpDownRandomConnections.Value);
             else
             {
-                MessageBox.Show("Niepoprawna ilość wierchołków bądź połaczeń!");
+                MessageBox.Show("Niepoprawna ilość wierchołków bądź połaczeń!", "Błąd!");
                 return;
             }
 
