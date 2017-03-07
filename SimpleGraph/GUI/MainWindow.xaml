@@ -50,7 +50,7 @@
                                 <StackPanel>
                                     <DockPanel>
                                         <Label Content="Liczba punktów: " Width="105"/>
-                                        <xtlk:IntegerUpDown Name="intUpDownRandomPointsL" Height="28" Minimum="0" Value="10"/>
+                                        <xtlk:IntegerUpDown Name="intUpDownRandomPoints1" Height="28" Minimum="0" Value="10"/>
                                     </DockPanel>
                                     <DockPanel>
                                         <Label Content="Liczba połączeń: " Width="105"/>
@@ -65,11 +65,11 @@
                                 <StackPanel>
                                     <DockPanel>
                                         <Label Content="Liczba punktów: " Width="105"/>
-                                        <xtlk:IntegerUpDown Name="intUpDownRandomPointsP" Height="28" Minimum="0" Value="10"/>
+                                        <xtlk:IntegerUpDown Name="intUpDownRandomPoints2" Height="28" Minimum="0" Value="10"/>
                                     </DockPanel>
                                     <DockPanel>
                                         <Label Content="Liczba połączeń: " Width="105"/>
-                                        <xtlk:DoubleUpDown Name="doubleUpDownProbability" Height="28" Minimum="0.0" Maximum="1.0" Value="0.5" />
+                                        <xtlk:DoubleUpDown Name="doubleUpDownProbability" Height="28" Minimum="0.0" Maximum="1.0" Value="0.5" Increment="0.05"/>
                                     </DockPanel>
 
                                     <Button Name="btnDrawRandomGraphFromProbability" Content="RYSUJ GRAF" Margin="0,10,0,0" Click="btnDrawRandomGraphFromProbability_Click"/>

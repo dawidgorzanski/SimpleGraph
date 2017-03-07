@@ -44,7 +44,7 @@ namespace SimpleGraph
                 draw.CurrentGraph = GraphCreator.CreateFullGraph((int)intUpDownPoints.Value);
             else
             {
-                MessageBox.Show("Niepoprawna ilość wierchołków!");
+                MessageBox.Show("Niepoprawna ilość wierchołków!", "Błąd!");
                 return;
             }
 
@@ -55,19 +55,19 @@ namespace SimpleGraph
             draw.Draw();
         }
 
-        private void btnDrawRandomGraph_Click(object sender, RoutedEventArgs e)
+        private void btnDrawRandomGraphFromLines_Click(object sender, RoutedEventArgs e)
         {
             draw.ClearAll();
 
-            if (Graph.MaxConnections((int)intUpDownRandomPoints.Value) < (int)intUpDownRandomConnections.Value)
+            if (Graph.MaxConnections((int)intUpDownRandomPoints1.Value) < (int)intUpDownConnections.Value)
             {
                 MessageBox.Show(String.Format("Przekroczono maksymalną liczbę połaczeń!\nMaksymalna liczba polaczen dla {0} wierzcholkow wynosi {1}.",
-                    (int)intUpDownRandomPoints.Value, Graph.MaxConnections((int)intUpDownRandomPoints.Value)), "Błąd!");
+                    (int)intUpDownRandomPoints1.Value, Graph.MaxConnections((int)intUpDownRandomPoints1.Value)), "Błąd!");
                 return;
             }
 
-            if (intUpDownRandomPoints.Value != null && intUpDownRandomConnections.Value != null)
-                draw.CurrentGraph = GraphCreator.CreateRandomGraph((int)intUpDownRandomPoints.Value, (int)intUpDownRandomConnections.Value);
+            if (intUpDownRandomPoints1.Value != null && intUpDownConnections.Value != null)
+                draw.CurrentGraph = GraphCreator.CreateRandomGraph((int)intUpDownRandomPoints1.Value, (int)intUpDownConnections.Value);
             else
             {
                 MessageBox.Show("Niepoprawna ilość wierchołków bądź połaczeń!", "Błąd!");
@@ -79,7 +79,26 @@ namespace SimpleGraph
 
             draw.DrawMainCircle();
             draw.Draw();
-        }       
+        }
+
+        private void btnDrawRandomGraphFromProbability_Click(object sender, RoutedEventArgs e)
+        {
+            draw.ClearAll();
+
+            if (intUpDownRandomPoints2.Value != null && doubleUpDownProbability.Value != null)
+                draw.CurrentGraph = GraphCreator.CreateRandomGraphProbability((int)intUpDownRandomPoints1.Value, (double)doubleUpDownProbability.Value);
+            else
+            {
+                MessageBox.Show("Niepoprawna ilość wierchołków!", "Błąd!");
+                return;
+            }
+
+            draw.NodeRadius = (int)sliderNodeRadius.Value;
+            draw.Radius = (int)sliderRadius.Value;
+
+            draw.DrawMainCircle();
+            draw.Draw();
+        }
 
         private void btnClear_Click(object sender, RoutedEventArgs e)
         {
@@ -100,5 +119,7 @@ namespace SimpleGraph
         {
             Resources["ColorLines"] = new SolidColorBrush((Color)colorPickerLines.SelectedColor);
         }
+
+        
     }
 }
