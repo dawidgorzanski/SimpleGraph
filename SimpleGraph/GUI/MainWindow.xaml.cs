@@ -55,13 +55,12 @@ namespace SimpleGraph
             draw.Draw();
         }
 
-        private void btnDrawRandomGraph_Click(object sender, RoutedEventArgs e)
+        private void btnDrawRandomGraphFromLines_Click(object sender, RoutedEventArgs e)
         {
             draw.ClearAll();
 
-
-            if (intUpDownRandomPoints.Value != null && intUpDownRandomConnections.Value != null)
-                draw.CurrentGraph = GraphCreator.CreateRandomGraph((int)intUpDownRandomPoints.Value, (int)intUpDownRandomConnections.Value);
+            if (intUpDownRandomPointsL.Value != null && intUpDownConnections.Value != null)
+                draw.CurrentGraph = GraphCreator.CreateRandomGraph((int)intUpDownRandomPointsL.Value, (int)intUpDownConnections.Value);
             else
             {
                 MessageBox.Show("Niepoprawna ilość wierchołków bądź połaczeń!");
@@ -73,7 +72,26 @@ namespace SimpleGraph
 
             draw.DrawMainCircle();
             draw.Draw();
-        }       
+        }
+
+        private void btnDrawRandomGraphFromProbability_Click(object sender, RoutedEventArgs e)
+        {
+            draw.ClearAll();
+
+            if (intUpDownRandomPointsP.Value != null && doubleUpDownProbability.Value != null)
+                draw.CurrentGraph = GraphCreator.CreateRandomGraphProbability((int)intUpDownRandomPointsP.Value, (double)doubleUpDownProbability.Value);
+            else
+            {
+                MessageBox.Show("Niepoprawna ilość wierchołków bądź połaczeń!");
+                return;
+            }
+
+            draw.NodeRadius = (int)sliderNodeRadius.Value;
+            draw.Radius = (int)sliderRadius.Value;
+
+            draw.DrawMainCircle();
+            draw.Draw();
+        }
 
         private void btnClear_Click(object sender, RoutedEventArgs e)
         {
@@ -94,5 +112,7 @@ namespace SimpleGraph
         {
             Resources["ColorLines"] = new SolidColorBrush((Color)colorPickerLines.SelectedColor);
         }
+
+        
     }
 }

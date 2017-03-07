@@ -46,22 +46,37 @@
                                 </StackPanel>
                             </GroupBox>
 
-                            <GroupBox Header="Graf losowy">
+                            <GroupBox Header="Graf losowy G(n, l)">
                                 <StackPanel>
                                     <DockPanel>
                                         <Label Content="Liczba punktów: " Width="105"/>
-                                        <xtlk:IntegerUpDown Name="intUpDownRandomPoints" Height="28" Minimum="0" Value="10"/>
+                                        <xtlk:IntegerUpDown Name="intUpDownRandomPointsL" Height="28" Minimum="0" Value="10"/>
                                     </DockPanel>
                                     <DockPanel>
                                         <Label Content="Liczba połączeń: " Width="105"/>
-                                        <xtlk:IntegerUpDown Name="intUpDownRandomConnections" Height="28" Minimum="0" Value="10"/>
+                                        <xtlk:IntegerUpDown Name="intUpDownConnections" Height="28" Minimum="0" Value="10"/>
                                     </DockPanel>
                                                     
-                                    <Button Name="btnDrawRandomGraph" Content="RYSUJ GRAF" Margin="0,10,0,0" Click="btnDrawRandomGraph_Click"/>
+                                    <Button Name="btnDrawRandomGraphFromLines" Content="RYSUJ GRAF" Margin="0,10,0,0" Click="btnDrawRandomGraphFromLines_Click"/>
                                 </StackPanel>
                             </GroupBox>
 
-                            <Button Name="btnClear" Content="WYCZYŚĆ" Margin="0,30,0,10" Click="btnClear_Click" />
+                            <GroupBox Header="Graf losowy G(n, p)">
+                                <StackPanel>
+                                    <DockPanel>
+                                        <Label Content="Liczba punktów: " Width="105"/>
+                                        <xtlk:IntegerUpDown Name="intUpDownRandomPointsP" Height="28" Minimum="0" Value="10"/>
+                                    </DockPanel>
+                                    <DockPanel>
+                                        <Label Content="Liczba połączeń: " Width="105"/>
+                                        <xtlk:DoubleUpDown Name="doubleUpDownProbability" Height="28" Minimum="0.0" Maximum="1.0" Value="0.5" />
+                                    </DockPanel>
+
+                                    <Button Name="btnDrawRandomGraphFromProbability" Content="RYSUJ GRAF" Margin="0,10,0,0" Click="btnDrawRandomGraphFromProbability_Click"/>
+                                </StackPanel>
+                            </GroupBox>
+
+                            <Button Name="btnClear" Content="WYCZYŚĆ" Margin="0,5,0,5" Click="btnClear_Click" />
 
                             <DockPanel>
                                 <Label Content="Kolor punktów: " Width="105"/>
