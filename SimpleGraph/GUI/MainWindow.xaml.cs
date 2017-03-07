@@ -55,15 +55,22 @@ namespace SimpleGraph
             draw.Draw();
         }
 
-        private void btnDrawRandomGraphFromLines_Click(object sender, RoutedEventArgs e)
+        private void btnDrawRandomGraph_Click(object sender, RoutedEventArgs e)
         {
             draw.ClearAll();
 
-            if (intUpDownRandomPointsL.Value != null && intUpDownConnections.Value != null)
-                draw.CurrentGraph = GraphCreator.CreateRandomGraph((int)intUpDownRandomPointsL.Value, (int)intUpDownConnections.Value);
+            if (Graph.MaxConnections((int)intUpDownRandomPoints.Value) < (int)intUpDownRandomConnections.Value)
+            {
+                MessageBox.Show(String.Format("Przekroczono maksymalną liczbę połaczeń!\nMaksymalna liczba polaczen dla {0} wierzcholkow wynosi {1}.",
+                    (int)intUpDownRandomPoints.Value, Graph.MaxConnections((int)intUpDownRandomPoints.Value)), "Błąd!");
+                return;
+            }
+
+            if (intUpDownRandomPoints.Value != null && intUpDownRandomConnections.Value != null)
+                draw.CurrentGraph = GraphCreator.CreateRandomGraph((int)intUpDownRandomPoints.Value, (int)intUpDownRandomConnections.Value);
             else
             {
-                MessageBox.Show("Niepoprawna ilość wierchołków bądź połaczeń!");
+                MessageBox.Show("Niepoprawna ilość wierchołków bądź połaczeń!", "Błąd!");
                 return;
             }
 
@@ -72,26 +79,7 @@ namespace SimpleGraph
 
             draw.DrawMainCircle();
             draw.Draw();
-        }
-
-        private void btnDrawRandomGraphFromProbability_Click(object sender, RoutedEventArgs e)
-        {
-            draw.ClearAll();
-
-            if (intUpDownRandomPointsP.Value != null && doubleUpDownProbability.Value != null)
-                draw.CurrentGraph = GraphCreator.CreateRandomGraphProbability((int)intUpDownRandomPointsP.Value, (double)doubleUpDownProbability.Value);
-            else
-            {
-                MessageBox.Show("Niepoprawna ilość wierchołków bądź połaczeń!");
-                return;
-            }
-
-            draw.NodeRadius = (int)sliderNodeRadius.Value;
-            draw.Radius = (int)sliderRadius.Value;
-
-            draw.DrawMainCircle();
-            draw.Draw();
-        }
+        }       
 
         private void btnClear_Click(object sender, RoutedEventArgs e)
         {
@@ -112,7 +100,5 @@ namespace SimpleGraph
         {
             Resources["ColorLines"] = new SolidColorBrush((Color)colorPickerLines.SelectedColor);
         }
-
-        
     }
 }
