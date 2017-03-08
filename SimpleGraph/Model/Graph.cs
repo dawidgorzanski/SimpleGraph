@@ -108,10 +108,26 @@ namespace SimpleGraph.Model
             return finalString;
         }
 
-        public string ToIncidenceMatrixString()
+       public string ToIncidenceMatrixString()
         {
-            //TODO
-            return string.Empty;
+            int Dimension=_nodes.Count;
+            string finalString = null;
+            for(int i=0;i<Dimension;i++)
+            {
+                foreach (Connection con in _connections)
+                {
+                    if(con.Node1.ID==i || con.Node2.ID==i)
+                    {
+                        finalString = finalString + "1 ";
+                    }else
+                    {
+                        finalString = finalString + "0 ";
+                    }
+                }
+                finalString = finalString + "\r\n";
+            }
+            
+            return finalString;
         }
 
     }
