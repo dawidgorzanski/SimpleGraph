@@ -120,7 +120,7 @@ namespace SimpleGraph.Model
                     if (MatrixInt[i][i] == 1)
                         text = null;
                 }
-                if(text=null)
+                if(text==null)
                        MatrixInt=null;
             }
             
