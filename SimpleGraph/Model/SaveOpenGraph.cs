@@ -16,8 +16,9 @@ namespace SimpleGraph.Model
            // return true;
         }
 
-        public static int[][] ReadFromFile(string FilePath)
+        public static bool ReadFromFile(string FilePath)
         {
+            bool TrueOrFalse = true;
             string text = null;
             int[][] MatrixInt = null;
             using (TextReader reader = File.OpenText("C:\\Users\\IgnoRant\\Desktop\\file.txt"))
@@ -47,14 +48,14 @@ namespace SimpleGraph.Model
 
                 foreach (string line in lines)
                 {
-                    
+
                     string[] numbers = line.Split(' ');
 
                     if (Dimension == numbers.Length - 1)
                     {
                         if (Int32.TryParse(numbers[numbers.Length - 1], out Variable))
                         {
-                            text = null;
+                            TrueOrFalse = false;
                             break;
                         }
                     }
@@ -62,14 +63,13 @@ namespace SimpleGraph.Model
                     {
                         if (Int32.TryParse(numbers[numbers.Length - 1], out Variable) == false)
                         {
-                            Console.WriteLine(line);
-                            text = null;
+                            TrueOrFalse = false;
                             break;
                         }
                     }
                     else
                     {
-                        text = null;
+                        TrueOrFalse = false;
                         break;
                     }
 
@@ -78,54 +78,66 @@ namespace SimpleGraph.Model
                         break;
                 }
                 //Inicjalizacja MatrixInt
-                MatrixInt = new int[Dimension][];
-                for (int i = 0; i < Dimension; i++)
-                {
-                    MatrixInt[i] = new int[Dimension];
-                }
-                //Sprawdzenie czy w macierzy są tylko 0 i 1
-                for (int i = 0; i < Dimension; i++)
-                {
-                    string[] numbers = lines[i].Split(' ');
 
-                    for (int j = 0; j < Dimension; j++)
+                if (TrueOrFalse)
+                {
+                    MatrixInt = new int[Dimension][];
+                    for (int i = 0; i < Dimension; i++)
                     {
-                        if (int.TryParse(numbers[j], out Variable) != true)
-                        {
-                            text = null;
-                            break;
-                        }
-                        if (Variable != 1 && Variable != 0)
-                        {
-                            text = null;
-                            break;
-                        }
-                        MatrixInt[i][j] = Variable;
+                        MatrixInt[i] = new int[Dimension];
                     }
-                }
-
-                for (int i = 0; i < Dimension; i++)
-                {
-                    for (int j = 0; j < Dimension; j++)
+                    //Sprawdzenie czy w macierzy są tylko 0 i 1
+                    for (int i = 0; i < Dimension; i++)
                     {
-                        if (MatrixInt[i][j] != MatrixInt[j][i])
+                        string[] numbers = lines[i].Split(' ');
+
+                        for (int j = 0; j < Dimension; j++)
                         {
-                            text = null;
-                            break;
+                            if (int.TryParse(numbers[j], out Variable) != true)
+                            {
+                                TrueOrFalse = false;
+                                break;
+                            }
+                            if (Variable != 1 && Variable != 0)
+                            {
+                                TrueOrFalse = false;
+                                break;
+                            }
+                            MatrixInt[i][j] = Variable;
                         }
                     }
+                    //sprawdzanie czy macierz jest symetryczna
+                    for (int i = 0; i < Dimension; i++)
+                    {
+                        for (int j = 0; j < Dimension; j++)
+                        {
+                            if (MatrixInt[i][j] != MatrixInt[j][i])
+                            {
+                                TrueOrFalse = false;
+                                break;
+                            }
+                        }
+                    }
+                    //sprawdzanie czy diagonalna ma same jedynki
+                    for (int i = 0; i < Dimension; i++)
+                    {
+                        if (MatrixInt[i][i] == 1)
+                            TrueOrFalse = false;
+                    }
                 }
-                for(int i=0;i<Dimension;i++)
+                if (TrueOrFalse)
                 {
-                    if (MatrixInt[i][i] == 1)
-                        text = null;
+                    for (int i = 0; i < MatrixInt[1].Length; i++)
+                    {
+                        for (int j = 0; j < MatrixInt[1].Length; j++)
+                        {
+                               Console.Write("{0}", MatrixInt[i][j]);
+                        }
+                        Console.Write("\r\n");
+                    }
                 }
-                if(text==null)
-                       MatrixInt=null;
             }
-            
-            
-            return MatrixInt;
+            return TrueOrFalse;
         }
     }
 }
