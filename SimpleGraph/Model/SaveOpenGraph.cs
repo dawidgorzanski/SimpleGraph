@@ -125,17 +125,6 @@ namespace SimpleGraph.Model
                             TrueOrFalse = false;
                     }
                 }
-                if (TrueOrFalse)
-                {
-                    for (int i = 0; i < MatrixInt[1].Length; i++)
-                    {
-                        for (int j = 0; j < MatrixInt[1].Length; j++)
-                        {
-                               Console.Write("{0}", MatrixInt[i][j]);
-                        }
-                        Console.Write("\r\n");
-                    }
-                }
             }
             return TrueOrFalse;
         }
