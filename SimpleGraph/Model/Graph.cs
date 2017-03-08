@@ -55,16 +55,57 @@ namespace SimpleGraph.Model
             _connections.Add(connection);
         }
         
-        public string ToMatrixString()
+       public string ToMatrixString()
         {
-            //TODO
-            return string.Empty;
+            int Dimension = _nodes.Count;
+            string finalString = null;
+            int[][] Matrix = Matrix = new int[Dimension][];
+            for (int i = 0; i < Dimension; i++)
+            {
+                Matrix[i] = new int[Dimension];
+            }
+            for (int i = 0; i < _connections.Count; i++)
+            {
+                Matrix[_connections[i].Node1.ID][_connections[i].Node2.ID] = 1;
+                Matrix[_connections[i].Node2.ID][_connections[i].Node1.ID] = 1;
+            }
+            for (int i = 0; i < Dimension; i++)
+            {
+                for (int j = 0; j < Dimension; j++)
+                {
+                    finalString = finalString + Matrix[i][j].ToString() + " ";
+                }
+                finalString = finalString + "\r\n";
+            }
+            return finalString;
         }
 
         public string ToListString()
         {
-            //TODO
-            return string.Empty;
+            int Dimension = _nodes.Count;
+            string finalString = null;
+            List<List<int>> Data = new List<List<int>>();
+            for (int i = 0; i < Dimension; i++)
+            {
+                Data.Add(new List<int>());
+            }
+            foreach (Connection con in _connections)
+            {
+                Data[con.Node1.ID].Add(con.Node2.ID+1);
+                Data[con.Node2.ID].Add(con.Node1.ID+1);
+            }
+            int Counter = 1;
+            foreach (List<int> lista in Data)
+            {
+                finalString = finalString + Counter.ToString()+": ";
+                foreach (int Number in lista)
+                {
+                    finalString = finalString + Number.ToString() + "->";
+                }
+                finalString = finalString + "\r\n";
+                Counter++;
+            }
+            return finalString;
         }
 
         public string ToIncidenceMatrixString()
