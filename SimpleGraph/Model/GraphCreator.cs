@@ -13,18 +13,16 @@ namespace SimpleGraph.Model
         {
             int Dimension = MatrixInt[1].Length;
             Graph fromMatrix = new Graph();
-            List<Node> Nodes = new List<Node>();
-            List<Connection> Connections = new List<Connection>();
 
             for (int i = 0; i < Dimension; i++)
-                Nodes.Add(new Node() { ID = i });
+                fromMatrix._nodes.Add(new Node() { ID = i });
             for (int i = 0; i < Dimension; i++)
             {
                 for (int j = i + 1; j < Dimension; j++)
                 {
                     if (MatrixInt[i][j] == 1)
                     {
-                        Connections.Add(new Connection { Node1 = Nodes[i], Node2 = Nodes[j] });
+                        fromMatrix._connections.Add(new Connection { Node1 = fromMatrix._nodes[i], Node2 = fromMatrix._nodes[j] });
                     }
                 }
             }
