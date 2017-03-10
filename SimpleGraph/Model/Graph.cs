@@ -80,7 +80,7 @@ namespace SimpleGraph.Model
             return finalString;
         }
 
-        public string ToListString()
+       public string ToListString()
         {
             int Dimension = _nodes.Count;
             string finalString = null;

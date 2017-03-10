@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -10,18 +10,18 @@ namespace SimpleGraph.Model
     //Pamiętać o zamknięciu pliku - można użyć "using(new ..." i wtedy plik się zawsze zamknie
     public static class SaveOpenGraph
     {
-        public static void SaveToFile(string Graph)
+        public static void SaveToFile(string FilePath, string Graph)
         {
-            File.WriteAllText("C:\\Users\\IgnoRant\\Desktop\\test2.tx", Graph);
+            File.WriteAllText(FilePath, Graph);
            // return true;
         }
 
-        public static bool ReadFromFile(string FilePath)
+        public static bool ReadFromFile(string FilePath, out int[][] MatrixInt)
         {
             bool TrueOrFalse = true;
             string text = null;
-            int[][] MatrixInt = null;
-            using (TextReader reader = File.OpenText("C:\\Users\\IgnoRant\\Desktop\\file.txt"))
+            MatrixInt = null;
+            using (TextReader reader = File.OpenText(FilePath))
             {
                 //Variable- zmienna używana do otrzymywania wartości z funkcji TryParse 
                 int Variable;

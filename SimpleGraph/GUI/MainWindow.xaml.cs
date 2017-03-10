@@ -40,19 +40,35 @@ namespace SimpleGraph
         {
             draw.ClearAll();
 
-            if (intUpDownPoints.Value != null)
-                draw.CurrentGraph = GraphCreator.CreateFullGraph((int)intUpDownPoints.Value);
-            else
+            //if (intUpDownPoints.Value != null)
+            //    draw.CurrentGraph = GraphCreator.CreateFullGraph((int)intUpDownRandomPoints1.Value);
+            //else
+            //{
+            //    MessageBox.Show("Niepoprawna ilość wierchołków!", "Błąd!");
+            //    return;
+            //}
+
+            System.Windows.Forms.OpenFileDialog openFile = new System.Windows.Forms.OpenFileDialog();
+            openFile.Multiselect = false;
+            openFile.Filter = "Pliki tekstowe |*.txt|Wszystkie pliki | *.*";
+
+            if (openFile.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                MessageBox.Show("Niepoprawna ilość wierchołków!", "Błąd!");
-                return;
-            }
+                int[][] matrix;
+                if (SaveOpenGraph.ReadFromFile(openFile.FileName, out matrix))
+                {
+                    draw.CurrentGraph = GraphCreator.CreateFromMatrix(matrix);
+                    draw.NodeRadius = (int)sliderNodeRadius.Value;
+                    draw.Radius = (int)sliderRadius.Value;
 
-            draw.NodeRadius = (int)sliderNodeRadius.Value;
-            draw.Radius = (int)sliderRadius.Value;
-
-            draw.DrawMainCircle();
-            draw.Draw();
+                    draw.DrawMainCircle();
+                    draw.Draw();
+                }
+                else
+                {
+                    MessageBox.Show("Błędna zawartość pliku!", "Błąd");
+                }
+            }            
         }
 
         private void btnDrawRandomGraphFromLines_Click(object sender, RoutedEventArgs e)
