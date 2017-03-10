@@ -36,24 +36,24 @@ namespace SimpleGraph
             colorPickerPoints.SelectedColor = Colors.Red;
         }
 
-        private void btnDrawFullGraph_Click(object sender, RoutedEventArgs e)
-        {
-            draw.ClearAll();
+        //private void btnDrawFullGraph_Click(object sender, RoutedEventArgs e)
+        //{
+        //    draw.ClearAll();
 
-            if (intUpDownPoints.Value != null)
-                draw.CurrentGraph = GraphCreator.CreateFullGraph((int)intUpDownPoints.Value);
-            else
-            {
-                MessageBox.Show("Niepoprawna ilość wierchołków!", "Błąd!");
-                return;
-            }
+        //    if (intUpDownPoints.Value != null)
+        //        draw.CurrentGraph = GraphCreator.CreateFullGraph((int)intUpDownPoints.Value);
+        //    else
+        //    {
+        //        MessageBox.Show("Niepoprawna ilość wierchołków!", "Błąd!");
+        //        return;
+        //    }
 
-            draw.NodeRadius = (int)sliderNodeRadius.Value;
-            draw.Radius = (int)sliderRadius.Value;
+        //    draw.NodeRadius = (int)sliderNodeRadius.Value;
+        //    draw.Radius = (int)sliderRadius.Value;
 
-            draw.DrawMainCircle();
-            draw.Draw();
-        }
+        //    draw.DrawMainCircle();
+        //    draw.Draw();
+        //}
 
         private void btnDrawRandomGraphFromLines_Click(object sender, RoutedEventArgs e)
         {

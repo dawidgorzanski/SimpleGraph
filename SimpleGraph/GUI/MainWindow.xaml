@@ -35,7 +35,7 @@
                             <Label Content="Promień punktu: " />
                             <Slider Name="sliderNodeRadius" Minimum="6" Maximum="40" IsSnapToTickEnabled="True" TickFrequency="2" Value="10"/>
                             
-                            <GroupBox Header="Pełny graf">
+                            <!--<GroupBox Header="Pełny graf">
                                 <StackPanel>
                                     <DockPanel>
                                         <Label Content="Liczba punktów: " Width="105"/>
@@ -44,7 +44,7 @@
                                     
                                     <Button Name="btnDrawFullGraph" Content="RYSUJ GRAF PEŁNY" Margin="0,10,0,0" Click="btnDrawFullGraph_Click"/>
                                 </StackPanel>
-                            </GroupBox>
+                            </GroupBox>-->
 
                             <GroupBox Header="Graf losowy G(n, l)">
                                 <StackPanel>
