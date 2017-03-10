@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -84,6 +85,8 @@ namespace SimpleGraph
 
         private void btnClear_Click(object sender, RoutedEventArgs e)
         {
+            //Graf o 0 wierzchołkach, żeby nie było null
+            draw.CurrentGraph = GraphCreator.CreateFullGraph();
             draw.ClearAll();
         }
 
@@ -137,7 +140,7 @@ namespace SimpleGraph
 
             if (saveFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                switch(saveFileDialog.FilterIndex)
+                switch (saveFileDialog.FilterIndex)
                 {
                     case 1:
                         {

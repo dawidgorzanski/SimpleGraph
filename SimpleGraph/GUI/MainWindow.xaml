@@ -8,18 +8,7 @@
         mc:Ignorable="d"
         Title="Simple Graph" Height="768" Width="1366" WindowState="Maximized">
     <Grid>
-        <TabControl FontSize="18" SelectedIndex="1">
-            <TabItem Header="Designer" >
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="3*" />
-                        <ColumnDefinition />
-                    </Grid.ColumnDefinitions>
-                </Grid>
-            </TabItem>
-            <TabItem Header="Rysunek" >
-                <Grid>
-                    <Grid.ColumnDefinitions>
+        <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="3*" Name="col1"/>
                         <ColumnDefinition Name="col2"/>
                     </Grid.ColumnDefinitions>
@@ -28,73 +17,68 @@
                         <Canvas Name="mainCanvas" Grid.Column="0" Height="{Binding ElementName=mainWindow, Path=Height}" Width="{Binding ElementName=col1, Path=Width}" />
                     </Border>
 
-                    <Border BorderThickness="1" BorderBrush="LightGray" Grid.Column="1" >
-                        <StackPanel Margin="10">
-                            <Label Content="Promień okręgu: " />
-                            <Slider Name="sliderRadius" Minimum="100" Maximum="300" IsSnapToTickEnabled="True" TickFrequency="10" Value="200" />
-                            <Label Content="Promień punktu: " />
-                            <Slider Name="sliderNodeRadius" Minimum="6" Maximum="40" IsSnapToTickEnabled="True" TickFrequency="2" Value="10"/>
+        <Border BorderThickness="1" BorderBrush="LightGray" Grid.Column="1" >
+            <StackPanel Margin="10">
+                <Label Content="Promień okręgu: " />
+                <Slider Name="sliderRadius" Minimum="100" Maximum="300" IsSnapToTickEnabled="True" TickFrequency="10" Value="200" />
+                <Label Content="Promień punktu: " />
+                <Slider Name="sliderNodeRadius" Minimum="6" Maximum="40" IsSnapToTickEnabled="True" TickFrequency="2" Value="10"/>
 
-                            <GroupBox Header="Graf losowy G(n, l)">
-                                <StackPanel>
-                                    <DockPanel>
-                                        <Label Content="Liczba punktów: " Width="105"/>
-                                        <xtlk:IntegerUpDown Name="intUpDownRandomPoints1" Height="28" Minimum="0" Value="10"/>
-                                    </DockPanel>
-                                    <DockPanel>
-                                        <Label Content="Liczba połączeń: " Width="105"/>
-                                        <xtlk:IntegerUpDown Name="intUpDownConnections" Height="28" Minimum="0" Value="10"/>
-                                    </DockPanel>
-                                                    
-                                    <Button Name="btnDrawRandomGraphFromLines" Content="RYSUJ GRAF" Margin="0,10,0,0" Click="btnDrawRandomGraphFromLines_Click"/>
-                                </StackPanel>
-                            </GroupBox>
+                <GroupBox Header="Graf losowy G(n, l)">
+                    <StackPanel>
+                        <DockPanel>
+                            <Label Content="Liczba punktów: " Width="105"/>
+                            <xtlk:IntegerUpDown Name="intUpDownRandomPoints1" Height="28" Minimum="0" Value="10"/>
+                        </DockPanel>
+                        <DockPanel>
+                            <Label Content="Liczba połączeń: " Width="105"/>
+                            <xtlk:IntegerUpDown Name="intUpDownConnections" Height="28" Minimum="0" Value="10"/>
+                        </DockPanel>
 
-                            <GroupBox Header="Graf losowy G(n, p)">
-                                <StackPanel>
-                                    <DockPanel>
-                                        <Label Content="Liczba punktów: " Width="105"/>
-                                        <xtlk:IntegerUpDown Name="intUpDownRandomPoints2" Height="28" Minimum="0" Value="10"/>
-                                    </DockPanel>
-                                    <DockPanel>
-                                        <Label Content="Liczba połączeń: " Width="105"/>
-                                        <xtlk:DoubleUpDown Name="doubleUpDownProbability" Height="28" Minimum="0.0" Maximum="1.0" Value="0.5" Increment="0.05"/>
-                                    </DockPanel>
+                        <Button Name="btnDrawRandomGraphFromLines" Content="RYSUJ GRAF" Margin="0,10,0,0" Click="btnDrawRandomGraphFromLines_Click"/>
+                    </StackPanel>
+                </GroupBox>
 
-                                    <Button Name="btnDrawRandomGraphFromProbability" Content="RYSUJ GRAF" Margin="0,10,0,0" Click="btnDrawRandomGraphFromProbability_Click"/>
-                                </StackPanel>
-                            </GroupBox>
+                <GroupBox Header="Graf losowy G(n, p)">
+                    <StackPanel>
+                        <DockPanel>
+                            <Label Content="Liczba punktów: " Width="105"/>
+                            <xtlk:IntegerUpDown Name="intUpDownRandomPoints2" Height="28" Minimum="0" Value="10"/>
+                        </DockPanel>
+                        <DockPanel>
+                            <Label Content="Liczba połączeń: " Width="105"/>
+                            <xtlk:DoubleUpDown Name="doubleUpDownProbability" Height="28" Minimum="0.0" Maximum="1.0" Value="0.5" Increment="0.05"/>
+                        </DockPanel>
 
-                            <GroupBox Header="Pliki">
-                                <StackPanel>
-                                    <Button Name="btnOpenFromFile" Content="Otwórz plik..." Click="btnOpenFromFile_Click" />
-                                    <Button Name="btnSaveToFile" Content="Zapisz do pliku..." Click="btnSaveToFile_Click" Margin="0,5,0,0"/>
-                                </StackPanel>
-                            </GroupBox>
+                        <Button Name="btnDrawRandomGraphFromProbability" Content="RYSUJ GRAF" Margin="0,10,0,0" Click="btnDrawRandomGraphFromProbability_Click"/>
+                    </StackPanel>
+                </GroupBox>
 
-                            <Button Name="btnClear" Content="WYCZYŚĆ" Margin="0,5,0,5" Click="btnClear_Click" />
+                <GroupBox Header="Otwórz/Zapisz do pliku">
+                    <StackPanel>
+                        <Button Name="btnOpenFromFile" Content="Otwórz plik..." Click="btnOpenFromFile_Click" />
+                        <Button Name="btnSaveToFile" Content="Zapisz do pliku..." Click="btnSaveToFile_Click" Margin="0,5,0,0"/>
+                    </StackPanel>
+                </GroupBox>
 
-                            <DockPanel>
-                                <Label Content="Kolor punktów: " Width="105"/>
-                                <xtlk:ColorPicker Name="colorPickerPoints" AdvancedButtonHeader="Zaawansowane" AvailableColorsHeader="Dostępne kolory" 
+                <Button Name="btnClear" Content="WYCZYŚĆ" Margin="0,5,0,5" Click="btnClear_Click" />
+
+                <DockPanel>
+                    <Label Content="Kolor punktów: " Width="105"/>
+                    <xtlk:ColorPicker Name="colorPickerPoints" AdvancedButtonHeader="Zaawansowane" AvailableColorsHeader="Dostępne kolory" 
                                       StandardButtonHeader="Standardowe" StandardColorsHeader="Kolory standardowe" SelectedColorChanged="colorPickerPoints_SelectedColorChanged" />
-                            </DockPanel>
-                            <DockPanel>
-                                <Label Content="Kolor okręgu: " Width="105"/>
-                                <xtlk:ColorPicker Name="colorPickerCircle" AdvancedButtonHeader="Zaawansowane" AvailableColorsHeader="Dostępne kolory" 
+                </DockPanel>
+                <DockPanel>
+                    <Label Content="Kolor okręgu: " Width="105"/>
+                    <xtlk:ColorPicker Name="colorPickerCircle" AdvancedButtonHeader="Zaawansowane" AvailableColorsHeader="Dostępne kolory" 
                                       StandardButtonHeader="Standardowe" StandardColorsHeader="Kolory standardowe" SelectedColorChanged="colorPickerCircle_SelectedColorChanged"/>
-                            </DockPanel>
-                            <DockPanel>
-                                <Label Content="Kolor linii: " Width="105"/>
-                                <xtlk:ColorPicker Name="colorPickerLines" AdvancedButtonHeader="Zaawansowane" AvailableColorsHeader="Dostępne kolory" 
+                </DockPanel>
+                <DockPanel>
+                    <Label Content="Kolor linii: " Width="105"/>
+                    <xtlk:ColorPicker Name="colorPickerLines" AdvancedButtonHeader="Zaawansowane" AvailableColorsHeader="Dostępne kolory" 
                                       StandardButtonHeader="Standardowe" StandardColorsHeader="Kolory standardowe" SelectedColorChanged="colorPickerLines_SelectedColorChanged"/>
-                            </DockPanel>
-
-                        </StackPanel>
-                    </Border>
-                </Grid>
-            </TabItem>
-        </TabControl>
-        
+                </DockPanel>
+            </StackPanel>
+        </Border>
     </Grid>
 </Window>
