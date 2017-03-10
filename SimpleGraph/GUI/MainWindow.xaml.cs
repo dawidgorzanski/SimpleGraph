@@ -85,8 +85,6 @@ namespace SimpleGraph
 
         private void btnClear_Click(object sender, RoutedEventArgs e)
         {
-            //Graf o 0 wierzchołkach, żeby nie było null
-            draw.CurrentGraph = GraphCreator.CreateFullGraph();
             draw.ClearAll();
         }
 

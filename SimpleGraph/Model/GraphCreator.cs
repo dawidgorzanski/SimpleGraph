@@ -70,13 +70,6 @@ namespace SimpleGraph.Model
             int maxConnections = Graph.MaxConnections(Nodes);
             Random rnd = new Random();
 
-            if (Connections > maxConnections)
-            {
-                //Tutaj wypisywanie bledu
-                //TODO
-                return new Graph();
-            }
-
             //Przypadek gdy polaczen do zrealizowania jest mniej niz maksymalna liczba polaczen
             if (maxConnections - Connections >= Connections)
             {

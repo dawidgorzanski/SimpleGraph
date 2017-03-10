@@ -114,6 +114,8 @@ namespace SimpleGraph.Model
 
         public void ClearAll()
         {
+            //żeby nie było null
+            CurrentGraph = GraphCreator.CreateFullGraph();
             _lines.Clear();
             _canvas.Children.Clear();
         }

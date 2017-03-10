@@ -47,7 +47,7 @@
                         </DockPanel>
                         <DockPanel>
                             <Label Content="Liczba połączeń: " Width="105"/>
-                            <xtlk:DoubleUpDown Name="doubleUpDownProbability" Height="28" Minimum="0.0" Maximum="1.0" Value="0.5" Increment="0.05"/>
+                            <xtlk:DoubleUpDown Name="doubleUpDownProbability" Height="28" Minimum="0.0" Maximum="1.0" Value="0.5" Increment="0.05" FormatString="0.##"/>
                         </DockPanel>
 
                         <Button Name="btnDrawRandomGraphFromProbability" Content="RYSUJ GRAF" Margin="0,10,0,0" Click="btnDrawRandomGraphFromProbability_Click"/>
