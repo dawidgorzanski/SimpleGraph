@@ -55,32 +55,28 @@ namespace SimpleGraph.Model
             _connections.Add(connection);
         }
         
-       public string ToMatrixString()
+        public string ToMatrixString()
         {
             int Dimension = _nodes.Count;
             string finalString = null;
-            int[][] Matrix = Matrix = new int[Dimension][];
-            for (int i = 0; i < Dimension; i++)
-            {
-                Matrix[i] = new int[Dimension];
-            }
+            int[, ] Matrix = Matrix = new int[Dimension, Dimension];
             for (int i = 0; i < _connections.Count; i++)
             {
-                Matrix[_connections[i].Node1.ID][_connections[i].Node2.ID] = 1;
-                Matrix[_connections[i].Node2.ID][_connections[i].Node1.ID] = 1;
+                Matrix[_connections[i].Node1.ID, _connections[i].Node2.ID] = 1;
+                Matrix[_connections[i].Node2.ID, _connections[i].Node1.ID] = 1;
             }
             for (int i = 0; i < Dimension; i++)
             {
                 for (int j = 0; j < Dimension; j++)
                 {
-                    finalString = finalString + Matrix[i][j].ToString() + " ";
+                    finalString = finalString + Matrix[i, j].ToString() + " ";
                 }
-                finalString = finalString + "\r\n";
+                finalString = finalString + Environment.NewLine;
             }
             return finalString;
         }
 
-       public string ToListString()
+        public string ToListString()
         {
             int Dimension = _nodes.Count;
             string finalString = null;
@@ -102,13 +98,13 @@ namespace SimpleGraph.Model
                 {
                     finalString = finalString + Number.ToString() + "->";
                 }
-                finalString = finalString + "\r\n";
+                finalString = finalString + Environment.NewLine;
                 Counter++;
             }
             return finalString;
         }
 
-       public string ToIncidenceMatrixString()
+        public string ToIncidenceMatrixString()
         {
             int Dimension=_nodes.Count;
             string finalString = null;
@@ -124,7 +120,7 @@ namespace SimpleGraph.Model
                         finalString = finalString + "0 ";
                     }
                 }
-                finalString = finalString + "\r\n";
+                finalString = finalString + Environment.NewLine;
             }
             
             return finalString;

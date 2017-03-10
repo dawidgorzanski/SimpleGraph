@@ -16,9 +16,8 @@ namespace SimpleGraph.Model
            // return true;
         }
 
-        public static bool ReadFromFile(string FilePath, out int[][] MatrixInt)
+        public static bool ReadFromFile(string FilePath, out int[,] MatrixInt)
         {
-            bool TrueOrFalse = true;
             string text = null;
             MatrixInt = null;
             using (TextReader reader = File.OpenText(FilePath))
@@ -55,22 +54,19 @@ namespace SimpleGraph.Model
                     {
                         if (Int32.TryParse(numbers[numbers.Length - 1], out Variable))
                         {
-                            TrueOrFalse = false;
-                            break;
+                            return false;
                         }
                     }
                     else if (Dimension == numbers.Length)
                     {
                         if (Int32.TryParse(numbers[numbers.Length - 1], out Variable) == false)
                         {
-                            TrueOrFalse = false;
-                            break;
+                            return false;
                         }
                     }
                     else
                     {
-                        TrueOrFalse = false;
-                        break;
+                        return false;
                     }
 
                     Counter++;
@@ -79,54 +75,46 @@ namespace SimpleGraph.Model
                 }
                 //Inicjalizacja MatrixInt
 
-                if (TrueOrFalse)
-                {
-                    MatrixInt = new int[Dimension][];
-                    for (int i = 0; i < Dimension; i++)
-                    {
-                        MatrixInt[i] = new int[Dimension];
-                    }
-                    //Sprawdzenie czy w macierzy są tylko 0 i 1
-                    for (int i = 0; i < Dimension; i++)
-                    {
-                        string[] numbers = lines[i].Split(' ');
+                MatrixInt = new int[Dimension, Dimension];
 
-                        for (int j = 0; j < Dimension; j++)
-                        {
-                            if (int.TryParse(numbers[j], out Variable) != true)
-                            {
-                                TrueOrFalse = false;
-                                break;
-                            }
-                            if (Variable != 1 && Variable != 0)
-                            {
-                                TrueOrFalse = false;
-                                break;
-                            }
-                            MatrixInt[i][j] = Variable;
-                        }
-                    }
-                    //sprawdzanie czy macierz jest symetryczna
-                    for (int i = 0; i < Dimension; i++)
+                //Sprawdzenie czy w macierzy są tylko 0 i 1
+                for (int i = 0; i < Dimension; i++)
+                {
+                    string[] numbers = lines[i].Split(' ');
+
+                    for (int j = 0; j < Dimension; j++)
                     {
-                        for (int j = 0; j < Dimension; j++)
+                        if (int.TryParse(numbers[j], out Variable) != true)
                         {
-                            if (MatrixInt[i][j] != MatrixInt[j][i])
-                            {
-                                TrueOrFalse = false;
-                                break;
-                            }
+                            return false;
                         }
-                    }
-                    //sprawdzanie czy diagonalna ma same jedynki
-                    for (int i = 0; i < Dimension; i++)
-                    {
-                        if (MatrixInt[i][i] == 1)
-                            TrueOrFalse = false;
+                        if (Variable != 1 && Variable != 0)
+                        {
+                            return false;
+                        }
+                        MatrixInt[i,j] = Variable;
                     }
                 }
+                //sprawdzanie czy macierz jest symetryczna
+                for (int i = 0; i < Dimension; i++)
+                {
+                    for (int j = 0; j < Dimension; j++)
+                    {
+                        if (MatrixInt[i,j] != MatrixInt[j,i])
+                        {
+                            return false;
+                        }
+                    }
+                }
+                //sprawdzanie czy diagonalna ma same jedynki
+                for (int i = 0; i < Dimension; i++)
+                {
+                    if (MatrixInt[i,i] == 1)
+                        return false;
+                }
+                
             }
-            return TrueOrFalse;
+            return true;
         }
     }
 }

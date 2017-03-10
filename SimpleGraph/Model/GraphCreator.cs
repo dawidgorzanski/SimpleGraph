@@ -9,9 +9,9 @@ namespace SimpleGraph.Model
     public static class GraphCreator
     {
 
-        public static Graph CreateFromMatrix(int[][] MatrixInt)
+        public static Graph CreateFromMatrix(int[,] MatrixInt)
         {
-            int Dimension = MatrixInt[1].Length;
+            int Dimension = MatrixInt.GetLength(0);
             Graph fromMatrix = new Graph();
 
             for (int i = 0; i < Dimension; i++)
@@ -20,7 +20,7 @@ namespace SimpleGraph.Model
             {
                 for (int j = i + 1; j < Dimension; j++)
                 {
-                    if (MatrixInt[i][j] == 1)
+                    if (MatrixInt[i, j] == 1)
                     {
                         fromMatrix.Connections.Add(new Connection { Node1 = fromMatrix.Nodes[i], Node2 = fromMatrix.Nodes[j] });
                     }

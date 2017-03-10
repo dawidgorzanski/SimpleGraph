@@ -36,24 +36,6 @@ namespace SimpleGraph
             colorPickerPoints.SelectedColor = Colors.Red;
         }
 
-        //private void btnDrawFullGraph_Click(object sender, RoutedEventArgs e)
-        //{
-        //    draw.ClearAll();
-
-        //    if (intUpDownPoints.Value != null)
-        //        draw.CurrentGraph = GraphCreator.CreateFullGraph((int)intUpDownPoints.Value);
-        //    else
-        //    {
-        //        MessageBox.Show("Niepoprawna ilość wierchołków!", "Błąd!");
-        //        return;
-        //    }
-
-        //    draw.NodeRadius = (int)sliderNodeRadius.Value;
-        //    draw.Radius = (int)sliderRadius.Value;
-
-        //    draw.DrawMainCircle();
-        //    draw.Draw();
-        //}
 
         private void btnDrawRandomGraphFromLines_Click(object sender, RoutedEventArgs e)
         {
@@ -120,6 +102,65 @@ namespace SimpleGraph
             Resources["ColorLines"] = new SolidColorBrush((Color)colorPickerLines.SelectedColor);
         }
 
-        
+        private void btnOpenFromFile_Click(object sender, RoutedEventArgs e)
+        {
+            System.Windows.Forms.OpenFileDialog openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            openFileDialog.Multiselect = false;
+            openFileDialog.Filter = "Pliki tekstowe | *.txt|Wszystkie pliki |*.*";
+
+            if (openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                int[,] graphMatrix;
+                if (SaveOpenGraph.ReadFromFile(openFileDialog.FileName, out graphMatrix))
+                {
+                    draw.ClearAll();
+
+                    draw.CurrentGraph = GraphCreator.CreateFromMatrix(graphMatrix);
+
+                    draw.NodeRadius = (int)sliderNodeRadius.Value;
+                    draw.Radius = (int)sliderRadius.Value;
+
+                    draw.DrawMainCircle();
+                    draw.Draw();
+                }
+                else
+                {
+                    MessageBox.Show("Błędna zawartość pliku!", "Błąd");
+                }
+            }
+        }
+
+        private void btnSaveToFile_Click(object sender, RoutedEventArgs e)
+        {
+            System.Windows.Forms.SaveFileDialog saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            saveFileDialog.Filter = "Macierz |*.txt|Lista |*.txt|Macierz incydencji |*.txt";
+
+            if (saveFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                switch(saveFileDialog.FilterIndex)
+                {
+                    case 1:
+                        {
+                            SaveOpenGraph.SaveToFile(saveFileDialog.FileName, draw.CurrentGraph.ToMatrixString());
+                            break;
+                        }
+                    case 2:
+                        {
+                            SaveOpenGraph.SaveToFile(saveFileDialog.FileName, draw.CurrentGraph.ToListString());
+                            break;
+                        }
+                    case 3:
+                        {
+                            SaveOpenGraph.SaveToFile(saveFileDialog.FileName, draw.CurrentGraph.ToIncidenceMatrixString());
+                            break;
+                        }
+                    default:
+                        {
+                            SaveOpenGraph.SaveToFile(saveFileDialog.FileName, draw.CurrentGraph.ToMatrixString());
+                            break;
+                        }
+                }
+            }
+        }
     }
 }
