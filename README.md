@@ -1,5 +1,5 @@
 # SimpleGraph
-Projekt #1 z przedmiotu Grafy i ich zastosowania.
+Projekt z przedmiotu Grafy i ich zastosowania.
 Aplikacja pozwala na stworzenie grafu w losowy sposób przy użyciu:
 - liczby węzłów oraz liczby połączeń
 - liczby węzłów oraz procentowej liczby połączeń
